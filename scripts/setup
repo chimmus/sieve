@@ -1,0 +1,14 @@
+#! /bin/bash
+
+mkdir -p "$HOME/.local/bin"
+ln -sf /usr/bin/mise "$HOME/.local/bin/mise"
+/usr/bin/mise trust
+/usr/bin/mise use -g fzf neovim starship chezmoi
+/usr/bin/mise exec -- chezmoi init --apply chimmus
+
+git config --global user.email "181723130+chimmus@users.noreply.github.com"
+git config --global user.name "chimmus"
+
+gh auth login --with-token </run/secrets/gh_token
+gh auth setup-git
+unset GH_TOKEN
